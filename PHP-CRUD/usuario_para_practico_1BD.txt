@@ -1,0 +1,78 @@
+-- Crear el login con usuario y contraseña
+CREATE LOGIN admin_1 WITH PASSWORD = 'admin123!';
+GO
+
+-- Darle acceso a la base de datos practico_1
+USE practico_1;
+GO
+
+CREATE USER admin_1 FOR LOGIN admin_1;
+GO
+
+-- Darle permisos completos sobre la base de datos
+ALTER ROLE db_owner ADD MEMBER admin_1;
+GO
+
+
+
+CREATE TABLE AuditoriaProductos (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    ProductoID INT NOT NULL,
+    NombreProducto VARCHAR(100) NOT NULL,
+    Operacion VARCHAR(10) NOT NULL,
+    Usuario VARCHAR(50) NOT NULL,
+    FechaHora DATETIME DEFAULT GETDATE(),
+    Detalles VARCHAR(255) NULL
+);
+GO
+
+ALTER TABLE productos
+ADD UsuarioCreacion VARCHAR(50) NULL;
+GO
+
+ALTER TABLE productos
+ADD UsuarioModificacion VARCHAR(50) NULL;
+GO
+
+
+
+USE practico_1;
+GO
+
+CREATE TABLE Usuarios (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    NombreUsuario VARCHAR(50) NOT NULL UNIQUE,
+    Contraseña VARCHAR(100) NOT NULL,
+    Rol VARCHAR(20) NOT NULL,
+    fecha_creacion DATETIME DEFAULT GETDATE()
+);
+GO
+
+-- Insertamos dos usuarios de ejemplo
+INSERT INTO Usuarios (NombreUsuario, Contraseña, Rol) VALUES
+    ('admin', 'admin123', 'Administrador'),
+    ('consultor', 'consultor123', 'Consultor');
+GO
+
+
+
+php conexion
+
+<?php
+// Variables de configuración de la conexión a SQL Server con PDO
+$servidor = "(local)";       // dónde está alojado el servidor
+$baseDatos = "practico_1";   // nombre de la base de datos
+$usuario = "admin_1";         // usuario de SQL Server
+$contraseña = "admin123!";    // contraseña del usuario
+
+try {
+    // Creamos la conexión con PDO usando el driver sqlsrv
+    $conexion = new PDO("sqlsrv:Server=$servidor;Database=$baseDatos", $usuario, $contraseña);
+    
+    // Hacemos que PDO lance excepciones cuando algo falla, en vez de fallar en silencio
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    // Si la conexión falla, mostramos el error y detenemos la ejecución
+    die("Error de conexión: " . $e->getMessage());
+}
+?>
