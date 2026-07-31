@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Agregar Alumno</title>
+</head>
+<body>
+    <h2>Agregar Alumno</h2>
+    
+    <form action="/ejercicio3/php/agregarEstudiante.php" method="POST">
+        <label>Cédula:</label>
+        <input type="text" name="cedula"><br><br>
+
+        <label>Nombre:</label>
+        <input type="text" name="nombre"><br><br>
+
+        <label>Apellido:</label>
+        <input type="text" name="apellido"><br><br>
+
+        <label>Inasistencias:</label>
+        <input type="number" name="inasistencia"><br><br>
+
+        <label>Calificación:</label>
+        <input type="number" name="calificacion"><br><br>
+
+        <button type="submit">Agregar</button>
+    </form>
+    <br><br>
+
+    <h2>Modificar Alumno</h2>
+<form action="/ejercicio3/php/modificarEstudiante.php" method="POST">
+    <label>Cédula:</label>
+    <input type="text" name="cedula"><br><br>
+
+    <label>Inasistencias:</label>
+    <input type="number" name="inasistencia"><br><br>
+
+    <label>Calificación:</label>
+    <input type="number" name="calificacion"><br><br>
+
+    <button type="submit">Modificar</button>
+</form>
+    <BR></BR><BR></BR>
+
+    <h2>Verificar Inasistencias</h2>
+<form action="/ejercicio3/php/verificacion.php" method="POST">
+    <label>Cédula:</label>
+    <input type="text" name="cedula"><br><br>
+    <button type="submit">Verificar</button>
+
+</form>
+<br><br>
+
+<h2>Verificar Calificación</h2>
+<form action="/ejercicio3/php/verificacionCalificacion.php" method="POST">
+    <label>Cédula:</label>
+    <input type="text" name="cedula"><br><br>
+    <button type="submit">Verificar</button>
+</form>
+
+<h2>Listar Todos los Alumnos</h2>
+<form action="/ejercicio3/php/lista.php" method="GET">
+    <button type="submit">Ver todos</button>
+</form>
+</html>
